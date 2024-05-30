@@ -1,6 +1,5 @@
 import json
 import os
-import csv
 
 contacts = []
 path_folder = 'data'
@@ -36,9 +35,9 @@ def update_contact():
     option_update = 0
     while option_update != 4:
         print('''[1] - Atualizar Nome
-    [2] - Atualizar Telefone
-    [3] - Atualizar E-mail
-    [4] - Sair''')
+[2] - Atualizar Telefone
+[3] - Atualizar E-mail
+[4] - Sair''')
         option_update = int(input('>>>>>> O que você quer atualizar? '))
         #Atualizar Nome
         if option_update == 1:
@@ -80,9 +79,10 @@ def save_contacts():
 def open_list_contacts():
     # Abrir o arquivo em modo de leitura
     with open(fullpath_contacts, 'r') as file:
-        leitor_csv = csv.reader(file)
-        for linha in leitor_csv:
-            contacts.append(linha)
+        data = json.load(file)
+        for item in data:
+            # Adicione o conjunto à lista
+            contacts.append(item)
 
     print('Dados lidos do arquivo:')
     print(contacts)
